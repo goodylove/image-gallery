@@ -1,17 +1,19 @@
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-function PageWrapper({ children }) {
-  const [user] = useAuthState(auth);
-  const navigate = useNavigate();
+function PageWrapper({ user, children }) {
+  if (user === null) {
+    return <Navigate to="/login" replace />;
+  }
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user]);
+  return children;
+}
+
+export function LoginWrapper({ user, children }) {
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
 
   return children;
 }

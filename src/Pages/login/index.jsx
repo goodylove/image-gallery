@@ -15,6 +15,7 @@ function Login() {
       if (user) {
         toast.success("successfully signed in");
         navigate("/");
+        console.log(user);
       }
     } catch (error) {
       toast.error("invalid email or password");
