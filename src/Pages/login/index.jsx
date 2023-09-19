@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import toast from "react-hot-toast";
 
-function SignIn() {
+function Login() {
   const navigate = useNavigate();
-
   const handleSigin = async (e) => {
     e.preventDefault();
     const email = e.target[0].value;
@@ -15,7 +14,7 @@ function SignIn() {
       const user = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
         toast.success("successfully signed in");
-        // navigate("/");
+        navigate("/");
       }
     } catch (error) {
       toast.error("invalid email or password");
@@ -53,4 +52,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Login;
