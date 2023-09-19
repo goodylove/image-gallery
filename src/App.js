@@ -37,14 +37,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PageWrapper user={user}>
-              <Home />
-            </PageWrapper>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route
           path="/login"
           element={

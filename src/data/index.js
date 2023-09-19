@@ -3,7 +3,7 @@ export const Images = [
     photo:
       "https://media.istockphoto.com/id/1142900322/photo/happy-female-runner-jogging-in-the-morning-in-nature.webp?b=1&s=170667a&w=0&k=20&c=Nwhpa3t3vSXwT0U3zNf4nEEKI-1ta80FUNOVufroI0M=",
 
-    tag: "happy-female-runner",
+    tag: "happy female runner",
   },
   {
     photo:
@@ -51,7 +51,7 @@ export const Images = [
     photo:
       "https://images.unsplash.com/photo-1568252542512-9fe8fe9c87bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZhc2hpb24lMjBtb2RlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60",
 
-    tagname: "dress",
+    tag: "dress",
   },
   {
     photo:
