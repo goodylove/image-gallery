@@ -6,10 +6,8 @@ image Gallery
 
 git clone: https://github.com/goodylove/image-gallery-hng-stage-three-task.git
 
-## dependencies
+cd image-gallery
 
 npm install
-
-## development
 
 npm start
