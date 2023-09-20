@@ -8,18 +8,20 @@ function Login() {
   const [email, setEamil] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  console.log(user);
 
   const login = async (e) => {
     e.preventDefault();
-    try {
-      await handleSigin(email, password);
 
+    await handleSigin(email, password);
+
+    if (user) {
       toast.success("successfully signed in");
       setEamil("");
       setPassword("");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } else {
+      // toast.error("input your email address");
     }
   };
 
@@ -44,7 +46,7 @@ function Login() {
         <div className="flex flex-col  text-white ">
           <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             value={password}

@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -18,8 +19,10 @@ export const AuthContextProvider = ({ children }) => {
       if (current) {
         console.log(current);
         setUser(current.user);
+      } else {
       }
     } catch (error) {
+      toast.error("input your email address");
       console.log(error);
     }
   };
