@@ -11,7 +11,9 @@ function Card({ item, id }) {
   return (
     <div className="lg:w-[300px]  border-[1px] rounded shadow-full w-[169px] md:w-[290px] cursor-move">
       <img src={item.photo} alt="" className="w-full h-[300px] object-cover" />
-      <h3 className="p-3">{captitalizeFirstLetterTittle(item.tag)}</h3>
+      <h3 className="p-3 text-[10px]">
+        {captitalizeFirstLetterTittle(item.tag)}
+      </h3>
     </div>
   );
 }
