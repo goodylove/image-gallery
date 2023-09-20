@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 function Card({ item, id }) {
   const captitalizeFirstLetterTittle = (text) => {
     const arr = text.split(" ");

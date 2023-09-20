@@ -1,4 +1,3 @@
-import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
 

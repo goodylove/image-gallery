@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../../firebase/index";
-import { useAuthState } from "react-firebase-hooks/auth";
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,

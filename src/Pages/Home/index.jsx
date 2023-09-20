@@ -6,7 +6,6 @@ import Card from "../../components/card";
 import { Images } from "./../../data/index";
 import { useRef } from "react";
 
-// grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-3  grid-cols-2  md:gap-4  gap-2 justify-items-center
 function Home() {
   const [image, setImage] = useState(Images);
   const [searchValue, setSearchValue] = useState("");
@@ -44,17 +43,17 @@ function Home() {
   };
 
   return (
-    <main className="text-white font-serif h-screen flex justify-center flex-col items-center">
+    <main className="text-white font-serif h-screen flex justify-center flex-col items-center ">
       <NavBar value={searchValue} handleSearch={handleSearch} />
 
-      <section className="h-[800px] flex flex-col items-center mt-[25rem]   md:mt-[30rem] ">
+      <section className="h-[800px] flex flex-col items-center mt-[25rem]   md:mt-[30rem]  ">
         {image.length > 0 && (
           <>
-            <h2 className="text-[14px] font-serif bg-white text-purple-500 p-2 m-2">
+            <h2 className="text-[12px] font-serif bg-white text-purple-500 p-2 m-2">
               Hello friend feel free to play around with your favorite image by
               dragging it to a different position 😊🎭
             </h2>
-            <div className="  flex flex-wrap w-[80%] gap-3 justify-center items-center">
+            <div className="  flex flex-wrap w-[80%] gap-8 justify-center items-center">
               {image.map((item, index) => {
                 return (
                   <div

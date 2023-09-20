@@ -16,12 +16,10 @@ function Login() {
     await handleSigin(email, password);
 
     if (user) {
-      toast.success("successfully signed in");
       setEamil("");
       setPassword("");
       navigate("/");
-    } else {
-      // toast.error("input your email address");
+      toast.success("successfully signed in");
     }
   };
 
@@ -43,6 +41,7 @@ function Login() {
             className=" p-2 outline-none rounded text-black"
           />
         </div>
+
         <div className="flex flex-col  text-white ">
           <label htmlFor="password">Password</label>
           <input
@@ -54,6 +53,7 @@ function Login() {
             className="p-2 outline-none rounded text-black"
           />
         </div>
+
         <button className="bg-purple-500  text-white p-2 rounded">Login</button>
       </form>
     </div>
