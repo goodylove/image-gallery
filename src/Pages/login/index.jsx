@@ -1,24 +1,25 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
 import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
 
 function Login() {
+  const { handleSigin, user } = useAuth();
+  const [email, setEamil] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSigin = async (e) => {
-    e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
 
+  const login = async (e) => {
+    e.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      if (user) {
-        toast.success("successfully signed in");
-        navigate("/");
-        console.log(user);
-      }
+      await handleSigin(email, password);
+
+      toast.success("successfully signed in");
+      setEamil("");
+      setPassword("");
+      navigate("/");
     } catch (error) {
-      toast.error("invalid email or password");
+      console.log(error);
     }
   };
 
@@ -26,7 +27,7 @@ function Login() {
     <div className=" h-screen w-full flex justify-center items-center">
       <form
         action=""
-        onSubmit={handleSigin}
+        onSubmit={login}
         className=" w-96 p-10 rounded shadow-3xl flex flex-col  justify-center gap-4 font-serif"
       >
         <div className="flex flex-col   text-white ">
@@ -35,6 +36,8 @@ function Login() {
             type="text"
             name="email"
             id="email"
+            value={email}
+            onChange={(e) => setEamil(e.target.value)}
             className=" p-2 outline-none rounded text-black"
           />
         </div>
@@ -44,6 +47,8 @@ function Login() {
             type="text"
             id="password"
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="p-2 outline-none rounded text-black"
           />
         </div>

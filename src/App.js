@@ -1,31 +1,35 @@
 import { Toaster } from "react-hot-toast";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
-import { auth } from "./firebase";
 import Home from "./Pages/Home/index";
-import PageWrapper from "./components/pageWrapper";
+
+import Login from "./Pages/login/index";
+import { useEffect, useState } from "react";
+
+import Loader from "./components/Loader/index";
 
 import "./App.css";
-import Login from "./Pages/login/index";
-import { useEffect } from "react";
-import { useState } from "react";
-import Loader from "./components/Loader/index";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { LoginWrapper } from "./components/pageWrapper/index";
+import useAuth from "./Hooks/useAuth";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const [user] = useAuthState(auth);
-  console.log(user);
-
+  const { user } = useAuth();
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 3000);
+    if (user) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [user]);
+
+  // useEffect(() => {}, [user]);
 
   if (loading)
     return (
@@ -38,14 +42,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={
-            <LoginWrapper user={user}>
-              <Login />
-            </LoginWrapper>
-          }
-        />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Toaster position="top-right" />
     </>

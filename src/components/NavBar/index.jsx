@@ -2,19 +2,24 @@ import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import { AiOutlineSearch } from "react-icons/ai";
 
-import { auth } from "../../firebase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NavBar({ value, handleSearch }) {
-  const navigate = useNavigate();
-  const [toggleSearchContainer, setToggleSearchContainer] = useState(false);
+import useAuth from "../../Hooks/useAuth";
 
-  const handleLogOut = () => {
-    signOut(auth).then(() => {
-      toast.success("Success");
+function NavBar({ value, handleSearch }) {
+  const [toggleSearchContainer, setToggleSearchContainer] = useState(false);
+  const { handleLogOut } = useAuth();
+  const navigate = useNavigate();
+
+  const logOut = async () => {
+    try {
+      await handleLogOut();
+      toast.success("Successfully signed out");
       navigate("/login");
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -41,7 +46,7 @@ function NavBar({ value, handleSearch }) {
         />
         <button
           className="bg-purple-500 p-2 text-white rounded "
-          onClick={handleLogOut}
+          onClick={logOut}
         >
           Sign Out
         </button>
