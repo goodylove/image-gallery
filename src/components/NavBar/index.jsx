@@ -32,7 +32,7 @@ function NavBar({ value, handleSearch }) {
             value={value}
             onChange={(e) => handleSearch(e)}
             placeholder="search"
-            className="p-1  outline-none text-black border-2"
+            className="p-1  outline-none text-black "
           />
           <button className="bg-black text-white p-2 rounded-r">
             <AiOutlineSearch />

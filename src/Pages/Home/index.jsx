@@ -4,7 +4,6 @@ import NavBar from "../../components/NavBar";
 import Card from "../../components/card";
 
 import { Images } from "./../../data/index";
-import { useRef } from "react";
 
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
@@ -12,7 +11,7 @@ function Home() {
   const [image, setImage] = useState(Images);
   const [searchValue, setSearchValue] = useState("");
 
-  const [drag, setDrag] = useState(Images);
+  // handle drag and drop
 
   const handleDrag = (result) => {
     if (!result.destination) return;
@@ -22,6 +21,7 @@ function Home() {
     setImage(item);
   };
 
+  // handle search
   const handleSearch = (e) => {
     let value = e.target.value;
     setSearchValue(value);
@@ -39,8 +39,6 @@ function Home() {
 
     setImage(searchItem);
   };
-
-  // handle drag and drop
 
   return (
     <main className="text-white font-serif h-screen flex justify-center flex-col items-center">
