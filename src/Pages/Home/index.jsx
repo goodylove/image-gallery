@@ -6,6 +6,7 @@ import Card from "../../components/card";
 import { Images } from "./../../data/index";
 import { useRef } from "react";
 
+// grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-3  grid-cols-2  md:gap-4  gap-2 justify-items-center
 function Home() {
   const [image, setImage] = useState(Images);
   const [searchValue, setSearchValue] = useState("");
@@ -53,7 +54,7 @@ function Home() {
               Hello friend feel free to play around with your favorite image by
               dragging it to a different position 😊🎭
             </h2>
-            <div className=" grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-3  grid-cols-2  md:gap-4  gap-2 justify-items-center">
+            <div className="  flex flex-wrap w-[80%] gap-3 justify-center items-center">
               {image.map((item, index) => {
                 return (
                   <div
