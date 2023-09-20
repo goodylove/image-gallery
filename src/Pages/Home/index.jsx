@@ -6,12 +6,21 @@ import Card from "../../components/card";
 import { Images } from "./../../data/index";
 import { useRef } from "react";
 
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+
 function Home() {
   const [image, setImage] = useState(Images);
   const [searchValue, setSearchValue] = useState("");
 
-  const dragItem = useRef(null);
-  const dragOverItem = useRef(null);
+  const [drag, setDrag] = useState(Images);
+
+  const handleDrag = (result) => {
+    if (!result.destination) return;
+    const item = Array.from(image);
+    const [removed] = item.splice(result.source.index, 1);
+    item.splice(result.destination.index, 0, removed);
+    setImage(item);
+  };
 
   const handleSearch = (e) => {
     let value = e.target.value;
@@ -32,15 +41,6 @@ function Home() {
   };
 
   // handle drag and drop
-  const handleDragActivite = () => {
-    const items = [...image];
-
-    const dragContent = items.splice(dragItem.current, 1)[0];
-    items.splice(dragOverItem.current, 0, dragContent);
-    dragItem.current = null;
-    dragOverItem.current = null;
-    setImage(items);
-  };
 
   return (
     <main className="text-white font-serif h-screen flex justify-center flex-col items-center">
@@ -53,32 +53,44 @@ function Home() {
               Hello friend feel free to play around with your favorite image by
               dragging it to a different position 😊🎭
             </h2>
-            <div className=" grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-3  grid-cols-2  md:gap-4  gap-5 justify-items-center">
-              {image.map((item, index) => {
-                return (
+            <DragDropContext onDragEnd={handleDrag}>
+              <Droppable droppableId="list">
+                {(provided) => (
                   <div
-                    key={index}
-                    draggable
-                    onDragStart={(e) => {
-                      dragItem.current = index;
-                    }}
-                    onDragEnd={handleDragActivite}
-                    onDragEnter={() => {
-                      dragOverItem.current = index;
-                    }}
-                    onDragOver={(e) => e.preventDefault()}
+                    className=" grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-3  grid-cols-2  md:gap-4  gap-5 justify-items-center"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
                   >
-                    <Card
-                      key={index}
-                      item={item}
-                      id={index}
-                      setImage={setImage}
-                      image={image}
-                    />
+                    {image.map((item, index) => {
+                      return (
+                        <Draggable
+                          draggableId={item.id.toString()}
+                          index={index}
+                          key={item.id}
+                        >
+                          {(provided) => (
+                            <div
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              <Card
+                                key={index}
+                                item={item}
+                                id={index}
+                                setImage={setImage}
+                                image={image}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                    {provided.placeholder}
                   </div>
-                );
-              })}
-            </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </>
         )}
         {image.length < 1 && <div>No image found</div>}
