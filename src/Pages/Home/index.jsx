@@ -55,7 +55,7 @@ function Home() {
               <Droppable droppableId="list">
                 {(provided) => (
                   <div
-                    className=" flex flex-wrap justify-center items-center w-96 gap-4"
+                    className=" flex flex-wrap justify-center items-center w-[80%] gap-4"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
