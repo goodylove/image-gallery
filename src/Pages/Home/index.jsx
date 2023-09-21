@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import NavBar from "../../components/NavBar";
 import Card from "../../components/card";
@@ -23,22 +23,26 @@ function Home() {
 
   // handle search
   const handleSearch = (e) => {
-    let value = e.target.value;
-    setSearchValue(value);
-
-    if (searchValue === "") {
-      setImage(Images);
-      return;
-    }
-
-    const searchItem = Images.filter((image) => {
-      if (image.tag.toLowerCase().match(searchValue.toLowerCase())) {
-        return image;
-      }
-    });
-
-    setImage(searchItem);
+    setSearchValue(e.target.value);
   };
+
+  useEffect(() => {
+    const sub = () => {
+      if (searchValue === "") {
+        setImage(Images);
+        return;
+      }
+
+      const searchItem = Images.filter((image) => {
+        if (image.tag.toLowerCase().includes(searchValue.toLowerCase())) {
+          return image;
+        }
+      });
+
+      return setImage(searchItem);
+    };
+    return () => sub();
+  }, [searchValue]);
 
   return (
     <main className="text-white font-serif h-screen flex justify-center flex-col items-center">

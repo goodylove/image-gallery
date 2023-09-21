@@ -3,31 +3,33 @@ import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 
-function Login() {
-  const { handleSigin, user } = useAuth();
+function Signup() {
+  const { handleSignUp, user } = useAuth();
   const [email, setEamil] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  console.log(user);
 
-  const login = async (e) => {
+  const signup = async (e) => {
     e.preventDefault();
 
-    await handleSigin(email, password);
-
-    if (user) {
-      setEamil("");
-      setPassword("");
-      navigate("/");
-      toast.success("successfully signed in");
+    if (email === "" && password === "") {
+      toast.error("Please enter a valid email address");
+      return;
     }
+
+    await handleSignUp(email, password);
+
+    setEamil("");
+    setPassword("");
+    navigate("/");
+    toast.success("successfully signed in");
   };
 
   return (
     <div className=" h-screen w-full flex justify-center items-center">
       <form
         action=""
-        onSubmit={login}
+        onSubmit={signup}
         className=" w-96 p-10 rounded shadow-3xl flex flex-col  justify-center gap-4 font-serif"
       >
         <div className="flex flex-col   text-white ">
@@ -54,10 +56,12 @@ function Login() {
           />
         </div>
 
-        <button className="bg-purple-500  text-white p-2 rounded">Login</button>
+        <button className="bg-purple-500  text-white p-2 rounded">
+          Sign UP
+        </button>
         <span className="mt-3 text-white font-poppins text-center">
-          <Link to="/signup" className="underline">
-            Dont have an account ? Sign up
+          <Link to="/login" className="underline">
+            already have an acount ? Sign In
           </Link>
         </span>
       </form>
@@ -65,4 +69,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

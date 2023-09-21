@@ -10,6 +10,7 @@ import Loader from "./components/Loader/index";
 
 import "./App.css";
 import useAuth from "./Hooks/useAuth";
+import SignUp from "./Pages/Signup/index";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -43,6 +44,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <Toaster position="top-right" />
     </>
